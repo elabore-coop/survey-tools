@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Survey form -->
+    <record id="survey_form" model="ir.ui.view">
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_survey_view_form" />
+        <field name="arch" type="xml">
+            <group name="options" position="inside">
+                <group name="event_speaker_options" string="Events speakers">
+                    <field name="generate_speaker" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

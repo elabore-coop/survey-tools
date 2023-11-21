@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_crm_case_opportunities_filter_survey_crm_generation_training" model="ir.ui.view">
+        <field name="name">crm.lead.search.opportunity.crm.generation.training"</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter" />
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <filter name="salesperson" position="before">
+                <filter string="Event product" name="event_product" context="{'group_by':'event_products_ids'}" />
+            </filter>
+            <field name="tag_ids" position="before">
+                <field name="event_products_ids" />
+            </field>
+        </field>
+    </record>
+
+
+    <record id="crm_lead_view_for_crm_generation_training" model="ir.ui.view">
+        <field name="model">crm.lead</field>
+        <field name="name">crm.lead.crm.generation.training</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button"
+                    name="action_view_survey_user_input_id"
+                    type="object"
+                    icon="fa-wpforms"
+                    help="View survey answer that created this lead"       
+                    attrs="{'invisible': [('survey_user_input_id', '=', False)]}"                
+                    >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            Responses
+                        </span>                                                
+                    </div>
+                </button>
+            </div>
+            <field name="survey_user_input_id" position="after">
+                <field
+                    name="event_products_ids"                    
+                    readonly="1"
+                    attrs="{'invisible': [('event_products_ids', '=', False)]}"
+                    widget="many2many_tags"
+                />
+            </field>
+        </field>
+    </record>
+
+    <!-- CRM LEAD TREE VIEW -->
+    <record id="crm_case_tree_view_oppor_survey_crm_generation_training" model="ir.ui.view">
+        <field name="name">crm.lead.tree.opportunity.survey.crm.generation.training</field>
+        <field name="model">crm.lead</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="event_products_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+</odoo>
