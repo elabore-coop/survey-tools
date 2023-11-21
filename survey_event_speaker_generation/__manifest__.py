@@ -9,7 +9,7 @@
     "author": "Elabore",
     "website": "https://www.elabore.coop",
     "category": "",
-    "depends": ["survey", "event_speaker"],
+    "depends": ["survey", "survey_event_base", "event_speaker"],
     "data": [        
         'views/mail_templates_chatter.xml',         
         'views/survey_survey_views.xml',        
