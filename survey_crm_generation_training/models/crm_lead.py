@@ -6,7 +6,7 @@ from odoo import fields, models
 class CrmLead(models.Model):
     _inherit = "crm.lead"
 
-    event_products_ids = fields.Many2many('product.product', string='Event product')
+    event_type_ids = fields.Many2many('event.type', string='Formation')
 
    
     def action_view_survey_user_input_id(self):

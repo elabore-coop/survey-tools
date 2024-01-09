@@ -8,8 +8,8 @@ class SurveyUserInput(models.Model):
 
     def _create_opportunity_post_process(self):
         """After lead creation from survey answer (module survey_crm_generation), 
-        if answer (survey_user_input) contains event_products_ids, copy it in lead.
+        if answer (survey_user_input) contains event_type_ids, copy it in lead.
         """
-        self.opportunity_id.event_products_ids = self.event_products_ids.ids
+        self.opportunity_id.event_type_ids = self.event_type_ids.ids
 
         return super(SurveyUserInput, self)._create_opportunity_post_process()

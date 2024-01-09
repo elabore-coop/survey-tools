@@ -19,7 +19,7 @@ Customize lead creation from survey according to trainings
     "category": "",
     "depends": ["event","survey_crm_generation","survey_event_registration_generation","survey_event_base"],
     "data": [        
-        "views/crm_lead_views.xml"
+        "views/crm_lead_views.xml", 
     ],
     "installable": True,
     "auto_install":True

@@ -6,10 +6,10 @@
         <field name="model">crm.lead</field>
         <field name="arch" type="xml">
             <filter name="salesperson" position="before">
-                <filter string="Event product" name="event_product" context="{'group_by':'event_products_ids'}" />
+                <filter string="Event type" name="event_type" context="{'group_by':'event_type_ids'}" />
             </filter>
             <field name="tag_ids" position="before">
-                <field name="event_products_ids" />
+                <field name="event_type_ids" />
             </field>
         </field>
     </record>
@@ -37,9 +37,7 @@
             </div>
             <field name="survey_user_input_id" position="after">
                 <field
-                    name="event_products_ids"                    
-                    readonly="1"
-                    attrs="{'invisible': [('event_products_ids', '=', False)]}"
+                    name="event_type_ids"                    
                     widget="many2many_tags"
                 />
             </field>
@@ -54,8 +52,10 @@
         <field name="inherit_id" ref="crm.crm_case_tree_view_oppor" />
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="event_products_ids" widget="many2many_tags" />
+                <field name="event_type_ids" widget="many2many_tags" />
             </field>
         </field>
     </record>
+
+   
 </odoo>

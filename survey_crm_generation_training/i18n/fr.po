@@ -26,11 +26,7 @@ msgstr ""
 "                            Réponses\n"
 "                        </span>"
 
-#. module: survey_crm_generation_training
-#: model:ir.model.fields,field_description:survey_crm_generation_training.field_crm_lead__event_products_ids
-#: model_terms:ir.ui.view,arch_db:survey_crm_generation_training.view_crm_case_opportunities_filter_survey_crm_generation_training
-msgid "Event product"
-msgstr "Produit de formation"
+
 
 #. module: survey_crm_generation_training
 #: model:ir.model,name:survey_crm_generation_training.model_crm_lead
