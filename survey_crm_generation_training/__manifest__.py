@@ -8,8 +8,8 @@
     'description': """
 Customize lead creation from survey according to trainings
 ----------------------------------------------------
-* add event products in crm.lead
-* Copy event products selected in survey answer, to created lead
+* add event type in crm.lead
+* Copy event type selected in survey answer, to created lead
 
 """,
     "version": "16.0.1.0.0",
