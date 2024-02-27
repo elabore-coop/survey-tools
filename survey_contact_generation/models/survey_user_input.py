@@ -64,12 +64,23 @@ class SurveyUserInput(models.Model):
             lambda r: r.survey_id.generate_contact# and not self.partner_id #uncomment to avoid contact generation several times
         ):
             vals = user_input._prepare_partner()
-            partner = False
+            partner = False        
             email = vals.get("email")
+            firstname = vals.get("firstname")
+            lastname = vals.get("lastname")
+
+            #search if partner exists with same email, firstname and lastname depending on submitted data
+            doublon_domain = []
             if email:
-                partner = self.env["res.partner"].search(
-                    [("email", "=", email)], limit=1
-                )
+                doublon_domain.append(("email", "ilike", email))
+            if firstname:
+                doublon_domain.append(("firstname", "ilike", firstname))
+            if lastname:
+                doublon_domain.append(("lastname", "ilike", lastname))
+
+            if doublon_domain:
+                partner = self.env["res.partner"].search(doublon_domain, limit=1)
+
             if not partner:
                 partner = self.env["res.partner"].create(vals)
                 self._create_contact_post_process(partner)
