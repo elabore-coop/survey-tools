@@ -32,8 +32,9 @@ class SurveyUserInput(models.Model):
         res = super()._mark_done()
         for user_input in self.filtered(lambda r: r.survey_id.generate_speaker and not r.speaker_id and r.partner_id):                        
             user_input.update({"speaker_id": user_input.partner_id.id})
-            for event in user_input.events_ids:                
-                event.speaker_ids = [Command.link(user_input.speaker_id.id)]            
+            for event in user_input.events_ids:
+                for track in event.track_ids:
+                    track.speaker_ids = [Command.link(user_input.speaker_id.id)]            
             user_input._create_speaker_post_process(user_input.speaker_id)
                 
 
