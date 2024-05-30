@@ -11,6 +11,7 @@
     "category": "",
     "depends": ["survey", "survey_base"],
     "data": [
+        'security/ir.model.access.csv',
         'views/survey_question_views.xml', 
         'views/survey_survey_views.xml',                  
     ],    

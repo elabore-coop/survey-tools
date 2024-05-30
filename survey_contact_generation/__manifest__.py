@@ -12,6 +12,7 @@
     "license": "AGPL-3",
     "depends": ["survey","partner_firstname"],
     "data": [
+        'security/ir.model.access.csv',
         "views/survey_question_views.xml",
         "views/survey_survey_views.xml",
     ],
