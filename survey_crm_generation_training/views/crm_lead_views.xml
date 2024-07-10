@@ -35,12 +35,14 @@
                     </div>
                 </button>
             </div>
-            <field name="survey_user_input_id" position="after">
-                <field
-                    name="event_type_ids"                    
-                    widget="many2many_tags"
-                />
-            </field>
+            <group name="lead_priority" position="after">
+                <group>
+                    <field
+                        name="event_type_ids"                    
+                        widget="many2many_tags"
+                    />
+                </group>
+            </group>
         </field>
     </record>
 
