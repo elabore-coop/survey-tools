@@ -14,6 +14,22 @@
         </field>
     </record>
 
+    <record id="view_crm_case_leads_filter_survey_crm_generation_training" model="ir.ui.view">
+        <field name="name">crm.lead.search.leads.crm.generation.training"</field>
+        <field name="inherit_id" ref="crm.view_crm_case_leads_filter" />
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <filter name="salesperson" position="before">
+                <filter string="Event type" name="event_type" context="{'group_by':'event_type_ids'}" />
+            </filter>
+            <field name="tag_ids" position="before">
+                <field name="event_type_ids" />
+            </field>
+        </field>
+    </record>
+
+    
+
 
     <record id="crm_lead_view_for_crm_generation_training" model="ir.ui.view">
         <field name="model">crm.lead</field>
@@ -46,7 +62,7 @@
         </field>
     </record>
 
-    <!-- CRM LEAD TREE VIEW -->
+    <!-- CRM OPPORTUNITIES TREE VIEW -->
     <record id="crm_case_tree_view_oppor_survey_crm_generation_training" model="ir.ui.view">
         <field name="name">crm.lead.tree.opportunity.survey.crm.generation.training</field>
         <field name="model">crm.lead</field>
@@ -58,6 +74,20 @@
             </field>
         </field>
     </record>
+
+    <!-- CRM OPPORTUNITIES TREE VIEW -->
+    <record id="crm_case_tree_view_leads_survey_crm_generation_training" model="ir.ui.view">
+        <field name="name">crm.case.tree.view.leads.survey.crm.generation.training</field>
+        <field name="model">crm.lead</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_leads" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="event_type_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+
 
    
 </odoo>
