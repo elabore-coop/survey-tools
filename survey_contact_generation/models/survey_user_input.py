@@ -69,6 +69,10 @@ class SurveyUserInput(models.Model):
             firstname = vals.get("firstname")
             lastname = vals.get("lastname")
 
+            # check doublon only if email send
+            if not email:
+                continue
+
             #search if partner exists with same email, firstname and lastname depending on submitted data
             doublon_domain = []
             if email:
