@@ -18,6 +18,7 @@ class SurveyUserInput(models.Model):
             "company_id": self.create_uid.company_id.id,
             "survey_user_input_id": self.id,
             "description": self._prepare_lead_description(),
+            "type": "lead"
         }
 
     def _prepare_lead_description(self):
