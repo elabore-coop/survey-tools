@@ -15,6 +15,7 @@ class SurveyUserInput(models.Model):
         basic_inputs = elegible_inputs.filtered(
             lambda x: x.answer_type not in {"suggestion"}
             and x.question_id.res_partner_field.name != "comment"
+            and not (x.question_id.comments_allowed and x.question_id.comment_count_as_answer and x.question_id.res_partner_field.ttype in ("many2one","many2many")) #exclude comments answer in case of many2one or many2many reference
         )
         vals = {
             line.question_id.res_partner_field.name: line[f"value_{line.answer_type}"]
@@ -28,9 +29,10 @@ class SurveyUserInput(models.Model):
                 ] = line.suggested_answer_id.res_partner_field_resource_ref.id
             elif line.question_id.res_partner_field.ttype == "many2many":
                 vals.setdefault(field_name, [])
-                vals[field_name] += [
-                    (4, line.suggested_answer_id.res_partner_field_resource_ref.id)
-                ]
+                if line.suggested_answer_id: # exclude "comment" answer
+                    vals[field_name] += [
+                        (4, line.suggested_answer_id.res_partner_field_resource_ref.id)
+                    ]
             # We'll use the comment field to add any other infos
             elif field_name == "comment":
                 vals.setdefault("comment", "")
