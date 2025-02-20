@@ -1,0 +1,26 @@
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+
+{
+    "name": "Survey record generation",
+    'summary': 'Allow to create record of any model when sending the form',
+    'description': """
+Allow to create record of any model when sending the form : 
+----------------------------------------------------
+* Choose list of models created on survey submission
+* Set default values for record created
+* Associate question with fields
+* For x2m fields : Associate values to questions
+""", 
+    "version": "16.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "Elabore",
+    "website": "https://www.elabore.coop",
+    "category": "",
+    "depends": ["survey"],
+    "data": [        
+      "security/ir.model.access.csv",
+      "views/survey_survey_views.xml", 
+      "views/survey_question_views.xml", 
+    ],    
+    "installable": True,
+}
