@@ -22,8 +22,11 @@ class SurveyUserInput(models.Model):
                         # find user_input_lines of the question
                         user_input_lines = [user_input_line for user_input_line in user_input.user_input_line_ids if user_input_line.question_id == field_value.question_id]
 
+                        if not user_input_lines:
+                            continue
+
                         if field_value.question_id.question_type in ['simple_choice', 'multiple_choice','matrix']:
-                            if field_value.question_id.answer_value_type == 'record':
+                            if field_value.question_id.answer_values_type == 'record':
                                 record_ids = []
                                 for user_input_line in user_input_lines:                            
                                     if user_input_line.suggested_answer_id and user_input_line.suggested_answer_id.record_id:
@@ -32,16 +35,28 @@ class SurveyUserInput(models.Model):
                                     vals[field_value.field_id.name] = record_ids[0]
                                 else:
                                     vals[field_value.field_id.name] = record_ids
-                            if field_value.question_id.answer_value_type == 'value':
-                                vals[field_value.field_id.name] = user_input_line.suggested_answer_id.value_char
+                            if field_value.question_id.answer_values_type == 'value':
+                                vals[field_value.field_id.name] = user_input_lines[0].suggested_answer_id.value_char
                         else:
-                            user_input_line = user_input_lines[0]
-                            vals[field_value.field_id.name] = user_input_line[0][f"value_{user_input_line.answer_type}"]
+                            vals[field_value.field_id.name] = user_input_lines[0][f"value_{user_input_lines[0].answer_type}"]
                     elif field_value.value_origin == 'other_record':
                         fields_to_update.append(field_value)
 
-                # Create record
-                record = self.env[model].create(vals)
+                # check duplicates
+                uniq_fields = [field_value.field_id.name for field_value in record_creation.field_values_ids.filtered(lambda r:r.unicity_check)]
+                duplicate = None
+                if uniq_fields:
+                    uniq_domain = []
+                    for uniq_field in uniq_fields:
+                        uniq_domain.append((uniq_field,'=',vals[uniq_field]))
+                    duplicate = self.env[model].search(uniq_domain, limit=1)
+
+                if duplicate:
+                    record = duplicate
+                else:
+                    # Create record
+                    record = self.env[model].create(vals)
+
                 created_records[record_creation.id] = record
 
             # update linked records

@@ -10,15 +10,15 @@ _logger = logging.getLogger(__name__)
 
 type_mapping = {
     "char": ["char_box", "numerical_box", "date", "datetime", "simple_choice", "multiple_choice"],
-    "text": ["char_box", "date"],
-    "html": ["text_box", "numerical_box", "datetime", "simple_choice", "multiple_choice"],
+    "text": ["char_box", "date", "simple_choice"],
+    "html": ["text_box", "numerical_box", "datetime", "simple_choice"],
     "integer": ["numerical_box"],
     "float": ["numerical_box"],
     "date": ["date"],
     "datetime": ["datetime"],
     "many2one": ["simple_choice"],
     "many2many": ["multiple_choice"], 
-    "selection": ["char_box"]
+    "selection": ["char_box", "simple_choice"]
 }
 
 
@@ -33,7 +33,8 @@ class SurveyRecordCreationFieldValues(models.Model):
 
     field_id = fields.Many2one(
         'ir.model.fields', 
-        domain="[('model_id','=',model_id),('readonly','=',False),('ttype','in',['char','selection','text','html','integer','float','date','datetime','many2one','many2many'])]")
+        domain="[('model_id','=',model_id),('readonly','=',False),('ttype','in',['char','selection','text','html','integer','float','date','datetime','many2one','many2many'])]",
+        ondelete="cascade")
     field_relation = fields.Char(related='field_id.relation')
     field_type = fields.Selection(related="field_id.ttype")
     field_help = fields.Html('Help', compute="_compute_field_help")
@@ -64,6 +65,8 @@ class SurveyRecordCreationFieldValues(models.Model):
     allowed_question_ids = fields.Many2many('survey.question', compute='_compute_allowed_question_ids')
     question_id = fields.Many2one('survey.question', string="Question", domain="[('id','in',allowed_question_ids)]")
 
+    unicity_check = fields.Boolean('Unicity constraint', help="On record creation, if another record exists with same value, record will not be created.")
+
     @api.depends("field_id")
     def _compute_field_help(self):
         for record in self:
@@ -79,7 +82,10 @@ class SurveyRecordCreationFieldValues(models.Model):
             if not record_creation_field_values.survey_id or not record_creation_field_values.field_id:
                 record_creation_field_values.allowed_question_ids = None
                 return
-            question_domain = [('survey_id','=',record_creation_field_values.survey_id.id),'|','&',('answer_values_type','=','record'),('model_id','=',record_creation_field_values.field_id.relation),('answer_values_type','=','value')]
+            question_domain = [('survey_id','=',record_creation_field_values.survey_id.id)]
+            
+            if record_creation_field_values.field_id.ttype in ['many2one','many2many']:
+                question_domain.extend(['|','&',('answer_values_type','=','record'),('model_id','=',record_creation_field_values.field_id.relation),('answer_values_type','=','value')])
             if record_creation_field_values.field_id.ttype in type_mapping:
                 question_domain.append(('question_type','in',type_mapping[record_creation_field_values.field_id.ttype]))
 

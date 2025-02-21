@@ -11,7 +11,7 @@ class SurveyQuestion(models.Model):
     _inherit = 'survey.question'
 
     model_id = fields.Many2one('ir.model', string="Model")
-    answer_values_type = fields.Selection([('no', 'No values'),('value','Value'),('record','Record')])
+    answer_values_type = fields.Selection([('no', 'No values'),('value','Value'),('record','Record')], string="Associate value to answer", default="no", required=True)
     
     @api.onchange('model_id')
     def onchange_model_id(self):

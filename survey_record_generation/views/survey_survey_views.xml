@@ -21,11 +21,13 @@
                                     <tree>
                                         <field name="field_id" />
                                         <field name="displayed_value" />
+                                        <field name="unicity_check" />
                                     </tree>  
                                     <form>
                                         <group>
                                             <field name="model_id" invisible="1" />   
                                             <field name="field_id" /> 
+                                            <field name="unicity_check" />
                                             <field name="field_relation" invisible="1" />
                                             <field name="field_type" invisible="1" />
                                             <div colspan="2">
