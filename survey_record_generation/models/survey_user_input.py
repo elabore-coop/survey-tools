@@ -37,8 +37,10 @@ class SurveyUserInput(models.Model):
                                     vals[field_value.field_id.name] = record_ids
                             if field_value.question_id.answer_values_type == 'value':
                                 vals[field_value.field_id.name] = user_input_lines[0].suggested_answer_id.value_char
-                        else:
+                        elif user_input_lines[0].answer_type: # if value not filled by user, answer_type not set
                             vals[field_value.field_id.name] = user_input_lines[0][f"value_{user_input_lines[0].answer_type}"]
+                        else:
+                            vals[field_value.field_id.name] = None
                     elif field_value.value_origin == 'other_record':
                         fields_to_update.append(field_value)
 
