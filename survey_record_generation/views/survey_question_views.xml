@@ -8,6 +8,13 @@
             <xpath expr="//field[@name='suggested_answer_ids']" position="before">
                 <field name="answer_values_type" />
                 <field name="model_id" attrs="{'invisible':[('answer_values_type','!=','record')]}" />
+                <field name="model_name" invisible="1" />
+                <field name="fill_domain" widget="domain" options="{'model': 'model_name'}" attrs="{'invisible':['|',('answer_values_type','!=','record'),('model_id','=',False)]}" />
+                <button name="fill" string="Empty and fill"
+                    type="object"
+                    colspan="2"
+                    help="Empty the list and fill it with all items of selected model matching domain"
+                    attrs="{'invisible':[('answer_values_type','!=','record')]}" />
             </xpath>
             <xpath expr="//field[@name='suggested_answer_ids']" position="attributes">
                 <attribute
@@ -21,8 +28,8 @@
                     options="{'hide_model': True, 'no_create': True, 'no_edit': True, 'no_open': True}" 
                     attrs="{'invisible':[('answer_values_type','!=','record')]}"/>                
                 <field name="value_char"
-                    attrs="{'invisible':[('answer_values_type','!=','value')]}" />
-            </xpath>
+                    attrs="{'invisible':[('answer_values_type','!=','value')]}" />                
+            </xpath>            
         </field>
     </record>
 </odoo>
