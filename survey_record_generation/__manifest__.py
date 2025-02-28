@@ -21,6 +21,8 @@ Allow to create record of any model when sending the form :
       "security/ir.model.access.csv",
       "views/survey_survey_views.xml", 
       "views/survey_question_views.xml", 
+      "views/survey_user_input_views.xml", 
+      "views/survey_generated_record_views.xml", 
     ],    
     "installable": True,
 }
