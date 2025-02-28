@@ -1,9 +1,35 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import models
+from odoo import models, fields
 
 
 class SurveyUserInput(models.Model):
     _inherit = "survey.user_input"
+
+    generated_record_ids = fields.One2many('survey.generated.record', 'user_input_id', 'Generated records')
+    generated_records_count = fields.Integer("Attempts Count", compute='_compute_generated_records_count')
+
+    def _compute_generated_records_count(self):
+        for user_input in self:
+            user_input.generated_records_count = len(user_input.generated_record_ids)
+
+
+    def action_redirect_to_generated_records(self):
+        self.ensure_one()
+
+        action = self.env['ir.actions.act_window']._for_xml_id('survey_record_generation.survey_generated_record_action')
+        """ context = dict(self.env.context or {})
+
+        context['create'] = False
+        context['search_default_survey_id'] = self.survey_id.id
+        context['search_default_group_by_survey'] = False
+        if self.partner_id:
+            context['search_default_partner_id'] = self.partner_id.id
+        elif self.email:
+            context['search_default_email'] = self.email
+
+        action['context'] = context """
+
+        return action
 
     def _mark_done(self):
         # generate records
@@ -58,13 +84,25 @@ class SurveyUserInput(models.Model):
                 else:
                     # Create record
                     record = self.env[model].create(vals)
-
+                    # Link generated records to user input
+                    self.env['survey.generated.record'].create({
+                        'survey_record_creation_name':record_creation.name,
+                        'survey_record_creation_id':record_creation.id, 
+                        'user_input_id':user_input.id, 
+                        "created_record_id":"%s,%s" % (model,record.id)
+                    })
+                    
                 created_records[record_creation.id] = record
+
+                
 
             # update linked records
             for field_to_update in fields_to_update:
                 record_to_update = created_records[field_to_update.survey_record_creation_id.id]
                 linked_record = created_records[field_to_update.other_created_record_id.id]
                 record_to_update.write({field_to_update.field_id.name:linked_record.id})
+
+            
+            
 
         return super()._mark_done()
