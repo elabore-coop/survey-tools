@@ -13,7 +13,7 @@
                         type="object"
                         class="oe_stat_button"                        
                         icon="fa-files-o">
-                        <field string="Generated records" name="attempts_count" widget="statinfo"/>
+                        <field string="Generated records" name="generated_records_count" widget="statinfo"/>
                     </button>
                 </xpath>
             </field>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 17:06+0000\n"
-"PO-Revision-Date: 2025-02-24 17:06+0000\n"
+"POT-Creation-Date: 2025-04-15 10:34+0000\n"
+"PO-Revision-Date: 2025-04-15 10:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,12 +27,18 @@ msgstr ""
 "        * Depuis un autre enregistrement créé: Vous pouvez attribuer un autre enregistrement créé pour lier plusieurs enregistrements. Peut être utilisé uniquement avec les champs one2many."
 
 #. module: survey_record_generation
+#: model_terms:ir.ui.view,arch_db:survey_record_generation.survey_generated_record_view_search
+msgid "Active survey input"
+msgstr "Participation active"
+
+#. module: survey_record_generation
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__allowed_question_ids
 msgid "Allowed Question"
 msgstr "Question autorisée"
 
 #. module: survey_record_generation
 #. odoo-python
+#: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
 #: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
 #, python-format
 msgid "Answer to question: %s"
@@ -45,6 +51,12 @@ msgid "Associate value to answer"
 msgstr "Associer une valeur à la réponse"
 
 #. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_user_input__generated_records_count
+msgid "Attempts Count"
+msgstr ""
+
+#. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_generated_record__create_uid
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation__create_uid
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__create_uid
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values_x2m__create_uid
@@ -52,6 +64,7 @@ msgid "Created by"
 msgstr "Créé par"
 
 #. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_generated_record__create_date
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation__create_date
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__create_date
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values_x2m__create_date
@@ -59,6 +72,7 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_generated_record__display_name
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation__display_name
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__display_name
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values_x2m__display_name
@@ -79,7 +93,9 @@ msgstr "Vider et remplir"
 #: model_terms:ir.ui.view,arch_db:survey_record_generation.survey_question_form
 msgid ""
 "Empty the list and fill it with all items of selected model matching domain"
-msgstr "Vide la liste et la remplie avec tous les enregistrements du modèle sélectionné qui correspondent au domaine"
+msgstr ""
+"Vide la liste et la remplie avec tous les enregistrements du modèle "
+"sélectionné qui correspondent au domaine"
 
 #. module: survey_record_generation
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__field_id
@@ -93,6 +109,7 @@ msgstr "Type de champ"
 
 #. module: survey_record_generation
 #. odoo-python
+#: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
 #: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
 #, python-format
 msgid "Field type is : <b>%s</b>"
@@ -124,18 +141,42 @@ msgid "From other created record"
 msgstr "Depuis un autre enregistrement créé"
 
 #. module: survey_record_generation
+#: model_terms:ir.ui.view,arch_db:survey_record_generation.survey_generated_record_view_tree
+msgid "Generated from survey input"
+msgstr "Généré depuis la participation"
+
+#. module: survey_record_generation
+#: model_terms:ir.ui.view,arch_db:survey_record_generation.survey_generated_record_view_tree
+msgid "Generated record type"
+msgstr "Type d'enregistrement généré"
+
+#. module: survey_record_generation
+#: model:ir.actions.act_window,name:survey_record_generation.survey_generated_record_action
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_user_input__generated_record_ids
+#: model_terms:ir.ui.view,arch_db:survey_record_generation.survey_user_input_view_form_survey_record_generation
+msgid "Generated records"
+msgstr "Enregistrements générés"
+
+#. module: survey_record_generation
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__field_help
 msgid "Help"
 msgstr "Aide"
 
 #. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_generated_record__id
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation__id
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__id
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values_x2m__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: survey_record_generation
+#: model:ir.model,name:survey_record_generation.model_survey_question
+msgid "Inherit Survey Question for extra fields"
+msgstr "Question du sondage"
+
+#. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_generated_record____last_update
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation____last_update
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values____last_update
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values_x2m____last_update
@@ -143,6 +184,7 @@ msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_generated_record__write_uid
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation__write_uid
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__write_uid
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values_x2m__write_uid
@@ -150,11 +192,17 @@ msgid "Last Updated by"
 msgstr "Dernière modification par"
 
 #. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_generated_record__write_date
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation__write_date
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__write_date
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values_x2m__write_date
 msgid "Last Updated on"
 msgstr "Dernière modification le"
+
+#. module: survey_record_generation
+#: model_terms:ir.ui.view,arch_db:survey_record_generation.survey_generated_record_view_tree
+msgid "Link to generated record"
+msgstr "Lien vers l'enregistrement généré"
 
 #. module: survey_record_generation
 #: model:ir.model.fields,help:survey_record_generation.field_survey_survey__survey_record_creation_ids
@@ -177,12 +225,19 @@ msgid "Model of generated record"
 msgstr "Modèle de l'enregistrement généré"
 
 #. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_generated_record__survey_record_creation_name
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation__name
 msgid "Name"
 msgstr "Nom"
 
 #. module: survey_record_generation
+#: model_terms:ir.actions.act_window,help:survey_record_generation.survey_generated_record_action
+msgid "No generated records found"
+msgstr "Pas d'enregistrements générés trouvés"
+
+#. module: survey_record_generation
 #. odoo-python
+#: code:addons/survey_record_generation/models/survey_question.py:0
 #: code:addons/survey_record_generation/models/survey_question.py:0
 #, python-format
 msgid "No record found in %s"
@@ -199,11 +254,12 @@ msgid ""
 "On record creation, if another record exists with same value, record will "
 "not be created."
 msgstr ""
-"Lors de la création d'un enregistrement, si un autre enregistrement existe avec la même valeur, l'enregistrement ne sera "
-"pas créé."
+"Lors de la création d'un enregistrement, si un autre enregistrement existe "
+"avec la même valeur, l'enregistrement ne sera pas créé."
 
 #. module: survey_record_generation
 #. odoo-python
+#: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
 #: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
 #, python-format
 msgid "Other created record: "
@@ -215,10 +271,15 @@ msgid "Other record"
 msgstr "Autre enregistrement"
 
 #. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_generated_record__user_input_id
+msgid "Participation"
+msgstr ""
+
+#. module: survey_record_generation
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__question_id
 #: model:ir.model.fields.selection,name:survey_record_generation.selection__survey_record_creation_field_values__value_origin__question
 msgid "Question"
-msgstr "Question"
+msgstr ""
 
 #. module: survey_record_generation
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__fixed_value_many2one
@@ -238,6 +299,7 @@ msgid "Records creation"
 msgstr "Création d'enregistrements"
 
 #. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_generated_record__created_record_id
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_question_answer__record_id
 msgid "Referenced record"
 msgstr "Enregistrement référencé"
@@ -249,6 +311,7 @@ msgstr "Modèle relatif"
 
 #. module: survey_record_generation
 #. odoo-python
+#: code:addons/survey_record_generation/models/survey_record_creation.py:0
 #: code:addons/survey_record_generation/models/survey_record_creation.py:0
 #, python-format
 msgid "Some required fields are not set : %s"
@@ -267,11 +330,6 @@ msgid "Survey Label"
 msgstr "Étiquette du sondage"
 
 #. module: survey_record_generation
-#: model:ir.model,name:survey_record_generation.model_survey_question
-msgid "Survey Question"
-msgstr "Question du sondage"
-
-#. module: survey_record_generation
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__survey_record_creation_id
 msgid "Survey Record Creation"
 msgstr "Sondage Création d'enregistrements"
@@ -283,8 +341,13 @@ msgstr "Sondage Création d'enregistrement Valeur des champs"
 
 #. module: survey_record_generation
 #: model:ir.model,name:survey_record_generation.model_survey_user_input
-msgid "Survey User Input"
+msgid "Survey User Input for custom matrix"
 msgstr "Entrée utilisateur du sondage"
+
+#. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_generated_record__survey_record_creation_id
+msgid "Survey record creation"
+msgstr "Génération d'enregistrement depuis la participation"
 
 #. module: survey_record_generation
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__unicity_check
@@ -320,6 +383,8 @@ msgstr "Message d'erreur"
 #. odoo-python
 #: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
 #: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
+#: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
+#: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
 #, python-format
 msgid "You should append at least one record in %s"
 msgstr "Vous devez au moins ajouter un enregistrement dans %s"
@@ -327,21 +392,27 @@ msgstr "Vous devez au moins ajouter un enregistrement dans %s"
 #. module: survey_record_generation
 #. odoo-python
 #: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
+#: code:addons/survey_record_generation/models/survey_record_creation_field_values.py:0
 #, python-format
 msgid "possible values are %s"
 msgstr "les valeurs possibles sont %s"
 
 #. module: survey_record_generation
+#: model:ir.model,name:survey_record_generation.model_survey_generated_record
+msgid "survey.generated.record"
+msgstr ""
+
+#. module: survey_record_generation
 #: model:ir.model,name:survey_record_generation.model_survey_record_creation
 msgid "survey.record.creation"
-msgstr "survey.record.creation"
+msgstr ""
 
 #. module: survey_record_generation
 #: model:ir.model,name:survey_record_generation.model_survey_record_creation_field_values
 msgid "survey.record.creation.field.values"
-msgstr "survey.record.creation.field.values"
+msgstr ""
 
 #. module: survey_record_generation
 #: model:ir.model,name:survey_record_generation.model_survey_record_creation_field_values_x2m
 msgid "survey.record.creation.field.values.x2m"
-msgstr "survey.record.creation.field.values.x2m"
+msgstr ""

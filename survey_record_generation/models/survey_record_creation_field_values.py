@@ -96,7 +96,6 @@ class SurveyRecordCreationFieldValues(models.Model):
     def _selection_target_model(self):
         return [(model.model, model.name) for model in self.env['ir.model'].sudo().search([])]
     
-    @api.onchange('field_id','origin')
     def clean_values(self):
         # clean values
         self.fixed_value_many2many = None
@@ -114,6 +113,8 @@ class SurveyRecordCreationFieldValues(models.Model):
 
     @api.onchange('field_id')
     def _onchange_field_id(self):
+                # clean values
+        self.clean_values()
         # Set reference field model and select first record
         if self.field_id and self.field_id.ttype == 'many2one' and self.field_id.relation:
             rec = self.env[self.field_id.relation].search([], limit=1)
