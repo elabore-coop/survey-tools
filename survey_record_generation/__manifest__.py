@@ -11,7 +11,7 @@ Allow to create record of any model when sending the form :
 * Associate question with fields
 * For x2m fields : Associate values to questions
 """, 
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "Elabore",
     "website": "https://www.elabore.coop",

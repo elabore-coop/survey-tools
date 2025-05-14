@@ -113,7 +113,7 @@ class SurveyRecordCreationFieldValues(models.Model):
 
     @api.onchange('field_id')
     def _onchange_field_id(self):
-                # clean values
+        # clean values
         self.clean_values()
         # Set reference field model and select first record
         if self.field_id and self.field_id.ttype == 'many2one' and self.field_id.relation:

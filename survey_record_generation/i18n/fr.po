@@ -350,6 +350,17 @@ msgid "Survey record creation"
 msgstr "Génération d'enregistrement depuis la participation"
 
 #. module: survey_record_generation
+#. odoo-python
+#: code:addons/survey_record_generation/models/survey_user_input.py:0
+#, python-format
+msgid ""
+"The field %s is mandatory. In Record Creation tab, drag "
+"%s at the top of the table"
+msgstr ""
+"Le champ %s est obligatoire. Dans l'onglet Création d'un enregistrement, glissez "
+"%s sur la première ligne du tableau"
+
+#. module: survey_record_generation
 #: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation_field_values__unicity_check
 msgid "Unicity constraint"
 msgstr "Contrainte d'unicité"
@@ -396,6 +407,11 @@ msgstr "Vous devez au moins ajouter un enregistrement dans %s"
 #, python-format
 msgid "possible values are %s"
 msgstr "les valeurs possibles sont %s"
+
+#. module: survey_record_generation
+#: model:ir.model.fields,field_description:survey_record_generation.field_survey_record_creation__sequence
+msgid "sequence"
+msgstr ""
 
 #. module: survey_record_generation
 #: model:ir.model,name:survey_record_generation.model_survey_generated_record

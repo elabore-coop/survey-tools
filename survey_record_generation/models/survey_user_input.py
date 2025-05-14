@@ -1,5 +1,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import models, fields
+from odoo import models, fields, _
+from odoo.exceptions import UserError
 
 
 class SurveyUserInput(models.Model):
@@ -37,9 +38,10 @@ class SurveyUserInput(models.Model):
             created_records = {}
             fields_to_update = []
 
-            for record_creation in user_input.survey_id.survey_record_creation_ids:
+            for record_creation in user_input.survey_id.survey_record_creation_ids.sorted('sequence'):
                 model = record_creation.model_id.model
                 vals = {}
+                ModelClass = self.env[model]
                 
                 for field_value in record_creation.field_values_ids:
                     if field_value.value_origin == 'fixed':
@@ -69,7 +71,17 @@ class SurveyUserInput(models.Model):
                             vals[field_value.field_id.name] = None
                     elif field_value.value_origin == 'other_record':
                         fields_to_update.append(field_value)
-
+                        # check if the field to update is mandatory
+                        if ModelClass._fields[field_value.field_id.name].required:
+                            # check if the other record is already created, if yes add it to vals
+                            if len(created_records) > 0 and created_records[field_value.other_created_record_id.id]:
+                                linked_record = created_records[field_value.other_created_record_id.id]
+                                vals[field_value.field_id.name] = linked_record.id
+                            else:
+                                raise UserError(
+                                    _("The field %s is mandatory. In Record Creation tab, drag %s at the top of the table")
+                                    % (field_value.field_id.display_name, field_value.other_created_record_id.name)
+                                )
                 # check duplicates
                 uniq_fields = [field_value.field_id.name for field_value in record_creation.field_values_ids.filtered(lambda r:r.unicity_check)]
                 duplicate = None

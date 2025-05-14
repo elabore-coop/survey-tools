@@ -16,6 +16,7 @@ class SurveyRecordCreation(models.Model):
     model_id = fields.Many2one('ir.model', "Model", help="Model of generated record")    
     field_values_ids = fields.One2many('survey.record.creation.field.values', 'survey_record_creation_id', string="Field values")
     warning_message = fields.Html('Warning message', compute="_compute_warning_message")
+    sequence = fields.Integer("sequence")
 
     @api.onchange('model_id')
     def clear_field_values_ids(self):
