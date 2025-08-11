@@ -13,7 +13,6 @@ class SurveyUserInput(models.Model):
         for user_input in self:
             user_input.generated_records_count = len(user_input.generated_record_ids)
 
-
     def action_redirect_to_generated_records(self):
         self.ensure_one()
 
@@ -32,7 +31,7 @@ class SurveyUserInput(models.Model):
 
         return action
 
-    def _mark_done(self):
+    def _mark_done(self, ignore_when_res_partner_mandatory_fields_are_missing = False):
         # generate records
         for user_input in self:
             created_records = {}
@@ -94,6 +93,11 @@ class SurveyUserInput(models.Model):
                 if duplicate:
                     record = duplicate
                 else:
+                    if model == "res.partner" and ignore_when_res_partner_mandatory_fields_are_missing:
+                        # this part has been developed for Calim specific needs : being able to create several Contacts with the same survey
+                        # TODO : find a way to make it generic for all models ?
+                        if not vals.get("lastname") and not vals.get("firstname"):
+                            continue
                     # Create record
                     record = self.env[model].create(vals)
                     # Link generated records to user input
@@ -103,18 +107,14 @@ class SurveyUserInput(models.Model):
                         'user_input_id':user_input.id, 
                         "created_record_id":"%s,%s" % (model,record.id)
                     })
-                    
-                created_records[record_creation.id] = record
 
-                
+                created_records[record_creation.id] = record
 
             # update linked records
             for field_to_update in fields_to_update:
-                record_to_update = created_records[field_to_update.survey_record_creation_id.id]
-                linked_record = created_records[field_to_update.other_created_record_id.id]
-                record_to_update.write({field_to_update.field_id.name:linked_record.id})
-
-            
-            
+                record_to_update = created_records.get(field_to_update.survey_record_creation_id.id)
+                if record_to_update:
+                    linked_record = created_records[field_to_update.other_created_record_id.id]
+                    record_to_update.write({field_to_update.field_id.name:linked_record.id})
 
         return super()._mark_done()
