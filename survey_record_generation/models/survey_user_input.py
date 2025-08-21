@@ -63,7 +63,11 @@ class SurveyUserInput(models.Model):
                                 else:
                                     vals[field_value.field_id.name] = record_ids
                             if field_value.question_id.answer_values_type == 'value':
-                                vals[field_value.field_id.name] = user_input_lines[0].suggested_answer_id.value_char
+                                if field_value.field_id.ttype == "boolean":
+                                    boolean_value = user_input_lines[0].suggested_answer_id.value_char in [True, 1, "1", "True", "true", "Oui", "oui"]
+                                    vals[field_value.field_id.name] = boolean_value
+                                else:
+                                    vals[field_value.field_id.name] = user_input_lines[0].suggested_answer_id.value_char
                         elif user_input_lines[0].answer_type: # if value not filled by user, answer_type not set
                             vals[field_value.field_id.name] = user_input_lines[0][f"value_{user_input_lines[0].answer_type}"]
                         else:

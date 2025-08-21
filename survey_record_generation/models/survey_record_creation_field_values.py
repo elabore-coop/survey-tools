@@ -33,7 +33,7 @@ class SurveyRecordCreationFieldValues(models.Model):
 
     field_id = fields.Many2one(
         'ir.model.fields', 
-        domain="[('model_id','=',model_id),('readonly','=',False),('ttype','in',['char','selection','text','html','integer','float','date','datetime','many2one','many2many'])]",
+        domain="[('model_id','=',model_id),('readonly','=',False),('ttype','in',['char','selection','text','html','integer','float','date','datetime','many2one','many2many', 'boolean'])]",
         ondelete="cascade")
     field_relation = fields.Char(related='field_id.relation')
     field_type = fields.Selection(related="field_id.ttype")
@@ -58,6 +58,7 @@ class SurveyRecordCreationFieldValues(models.Model):
     fixed_value_float = fields.Float("Value")
     fixed_value_date = fields.Date("Value")
     fixed_value_datetime = fields.Datetime("Value")    
+    fixed_value_boolean = fields.Boolean("Value")
 
     displayed_value = fields.Char("Value", compute="_compute_displayed_value")
     other_created_record_id = fields.Many2one("survey.record.creation", string="Other record", domain="[('survey_id','=',survey_id),('model_id.model','=',field_relation)]")
