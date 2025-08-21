@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- template for checkbox -->
+    <template id="template_checkbox" name="Extra question type Checkbox">
+        <input
+            type="checkbox"
+            class="form-check-input"
+            t-att-name="question.id"
+            t-att-data-question-type="question.question_type"
+        />
+<!--        TODO: je n'arrive pas à faire en sorte que la valeur du champs soit renvoyé dans les params POST lors de la soumission du formulaire -->
+<!--        Je pense qu'il faut surcharger la fonction js _prepareSubmitValues dans le fichier survey_form.js -->
+    </template>
+
+    <template id="survey_extra_question_types_question_container_inherited" inherit_id="survey.question_container" name="Question">
+        <xpath expr="//div[1]/t" position="after">
+            <t t-if="question.question_type == 'checkbox'"><t t-call="survey_extra_question_types.template_checkbox" /></t>
+        </xpath>
+    </template>
+</odoo>
